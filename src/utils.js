@@ -7,7 +7,7 @@ const buildDonut = (type) => {
     flavor: type,
     sprinkles: false,
     filled: false,
-    donutId: getUniqueDonutId()
+    donutId: getUniqueDonutId(),
   };
 };
 
@@ -24,7 +24,8 @@ export const alterSprinklesToDonut = (donutShelfData, userId, donutId) => {
     if (newShelfData[i].userId === userId) {
       for (let j = 0; j < newShelfData[i].donuts.length; j++) {
         if (newShelfData[i].donuts[j].donutId === donutId) {
-          newShelfData[i].donuts[j].sprinkles = !newShelfData[i].donuts[j].sprinkles;
+          newShelfData[i].donuts[j].sprinkles =
+            !newShelfData[i].donuts[j].sprinkles;
         }
       }
       break;
@@ -43,14 +44,19 @@ export const removeDonutFromBox = (donutShelfData, userId, donutId) => {
   // donut is removed from the userId's array of donuts
 };
 
-export const alterDonutFlavor = (donutShelfData, userId, donutId, selectedType) => {
+export const alterDonutFlavor = (
+  donutShelfData,
+  userId,
+  donutId,
+  selectedType
+) => {
   // There is a bug in this function
   const newShelfData = [...donutShelfData];
   for (let i = 0; i < newShelfData.length; i++) {
     if (newShelfData[i].userId === userId) {
       for (let j = 0; j < newShelfData[i].donuts.length; j++) {
         if (newShelfData[i].donuts[j].donutId === donutId) {
-          newShelfData[i].donuts[j].flavor = 'cherry';
+          newShelfData[i].donuts[j].flavor = "cherry"; //<- bug is: hard coded flavor? Should be selectedType
         }
       }
       break;
