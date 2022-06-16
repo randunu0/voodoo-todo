@@ -1,10 +1,16 @@
-import { ReplaceMeWithCorrectFunction } from "../const";
 import Donut from "../Donut/Donut";
 import "./DonutBox.css";
 
 const DonutBox = ({ boxData, handleBoxClick, isAdd }) => {
+  const handleClick = (e) => {
+    // this will prevent this event from bubbling to the DonutShelf
+    e.stopPropagation();
+    //console.log("box clicked");
+    handleBoxClick(boxData.userId, "");
+  };
+
   return (
-    <div className="donut-column" onClick={ReplaceMeWithCorrectFunction}>
+    <div className="donut-column" onClick={handleClick}>
       <h3>{boxData.name}</h3>
       <div className={`donut-container ${isAdd ? "add" : ""}`}>
         {boxData.donuts.map((donutData) => {

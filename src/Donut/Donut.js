@@ -7,6 +7,7 @@ const Donut = ({ handleBoxClick, donutData, userId, isAdd }) => {
   const handleClick = (e) => {
     // this will prevent this event from bubbling to the DonutBox
     e.stopPropagation();
+    //console.log("donut clicked");
     handleBoxClick(userId, donutId);
   };
 

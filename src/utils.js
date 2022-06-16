@@ -15,6 +15,15 @@ export const addDonutToBox = (donutShelfData, userId, type) => {
   // This function should return a copy of donutShelfData where a new donut
   // is added to the selected donut box (find with the userId)
   // Use the helper function `buildDonut` to create a donut object
+  const newShelfData = [...donutShelfData];
+  for (let i = 0; i < newShelfData.length; i++) {
+    if (newShelfData[i].userId === userId) {
+      newShelfData[i].donuts.push(buildDonut(type));
+      break;
+    }
+  }
+  //console.log("added");
+  return newShelfData;
 };
 
 export const alterSprinklesToDonut = (donutShelfData, userId, donutId) => {
@@ -37,11 +46,35 @@ export const alterSprinklesToDonut = (donutShelfData, userId, donutId) => {
 export const alterFillingToDonut = (donutShelfData, userId, donutId) => {
   // This function should return a copy of donutShelfData where the filling
   // prop is toggled on the specific donutId
+  const newShelfData = [...donutShelfData];
+  for (let i = 0; i < newShelfData.length; i++) {
+    if (newShelfData[i].userId === userId) {
+      for (let j = 0; j < newShelfData[i].donuts.length; j++) {
+        if (newShelfData[i].donuts[j].donutId === donutId) {
+          newShelfData[i].donuts[j].filled = !newShelfData[i].donuts[j].filled;
+        }
+      }
+      break;
+    }
+  }
+  return newShelfData;
 };
 
 export const removeDonutFromBox = (donutShelfData, userId, donutId) => {
   // This function should return a copy of donutShelfData where the selected
   // donut is removed from the userId's array of donuts
+  const newShelfData = [...donutShelfData];
+  for (let i = 0; i < newShelfData.length; i++) {
+    if (newShelfData[i].userId === userId) {
+      for (let j = 0; j < newShelfData[i].donuts.length; j++) {
+        if (newShelfData[i].donuts[j].donutId === donutId) {
+          newShelfData[i].donuts.splice(j, 1);
+        }
+      }
+      break;
+    }
+  }
+  return newShelfData;
 };
 
 export const alterDonutFlavor = (
@@ -56,7 +89,7 @@ export const alterDonutFlavor = (
     if (newShelfData[i].userId === userId) {
       for (let j = 0; j < newShelfData[i].donuts.length; j++) {
         if (newShelfData[i].donuts[j].donutId === donutId) {
-          newShelfData[i].donuts[j].flavor = "cherry"; //<- bug is: hard coded flavor? Should be selectedType
+          newShelfData[i].donuts[j].flavor = selectedType; //<- bug is: hard coded flavor? Should be selectedType
         }
       }
       break;
